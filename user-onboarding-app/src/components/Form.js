@@ -1,7 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { Formik, Form, Field, ErrorMessage, status } from 'formik';
+import React, { useState } from 'react';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
 import axios from 'axios';
 import * as Yup from 'yup';
+
+/*
+// KEEPING THIS TO SHOW HOW TO VALIDATE WITHOUT Yup
 
 const validate = ({ name, email, password, terms }) => {
   const errors = {};
@@ -30,10 +33,14 @@ const validate = ({ name, email, password, terms }) => {
 
   return errors;
 };
+*/
 
-// validationSchema: Yup.object().shape({
-//   name: Yup.string().required()
-// })
+const userSchema = Yup.object().shape({
+  name: Yup.string().required().min(2),
+  email: Yup.string().email().required(),
+  password: Yup.string().required().min(3),
+  terms: Yup.bool().oneOf([true], 'must accept terms and conditions'),
+});
 
 const UserForm = () => {
 
@@ -67,7 +74,8 @@ const UserForm = () => {
           })
 
       }}
-      validate={validate}
+      // validate={validate}
+      validationSchema={userSchema}
       render={props => {
         return(
           <Form className="formContainer">
@@ -80,7 +88,12 @@ const UserForm = () => {
                 placeholder="enter name"
                />
             </label>
-            <ErrorMessage name="name" component='div' className="red" />
+            {props.errors.name && props.touched.name ? (
+              <span className='red'>{props.errors.name}</span>
+            ) : (
+              ""
+            )}
+            {/* <ErrorMessage name="name" component='div' className="red" /> */}
             
             <label>
               *Email:
@@ -91,7 +104,12 @@ const UserForm = () => {
                 placeholder="enter email"  
               />
             </label>
-            <ErrorMessage name="email" component='div' className="red" />
+            {props.errors.email && props.touched.email ? (
+                <span className='red'>{props.errors.email}</span>
+              ) : (
+                ""
+              )}
+            {/* <ErrorMessage name="email" component='div' className="red" /> */}
 
             <label>
               *Password:
@@ -102,7 +120,12 @@ const UserForm = () => {
                 placeholder="enter password"
               />
             </label>
-            <ErrorMessage name="password" component='div' className="red" />
+            {props.errors.password && props.touched.password ? (
+                <span className='red'>{props.errors.password}</span>
+              ) : (
+                ""
+              )}
+            {/* <ErrorMessage name="password" component='div' className="red" /> */}
 
             <label>
               Bonus - how cool are you? (1-10)
@@ -128,7 +151,12 @@ const UserForm = () => {
                 name="terms"
               />
             </label>
-            <ErrorMessage name="terms" component='div' className="red" />
+            {props.errors.terms && props.touched.terms ? (
+                <span className='red'>{props.errors.terms}</span>
+              ) : (
+                ""
+              )}
+            {/* <ErrorMessage name="terms" component='div' className="red" /> */}
 
             <input className="submitButton" type="submit" />
           </Form>

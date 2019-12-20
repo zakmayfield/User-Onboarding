@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Formik, Form, Field } from 'formik';
 import axios from 'axios';
 import * as Yup from 'yup';
 
@@ -39,7 +39,7 @@ const userSchema = Yup.object().shape({
   name: Yup.string().required().min(2),
   email: Yup.string().email().required(),
   password: Yup.string().required().min(3),
-  terms: Yup.bool().oneOf([true], 'must accept terms and conditions'),
+  terms: Yup.bool().oneOf([true], 'must accept terms and conditions')
 });
 
 const UserForm = () => {
@@ -58,9 +58,8 @@ const UserForm = () => {
         terms: false
       }}
       onSubmit={(values, tools) => {
-        console.log(values, tools);
+        // console.log(values, tools);
         tools.resetForm();
-
         axios.post('https://reqres.in/api/users', values)
           .then(res => {
             console.log(`successful`, res)
@@ -72,7 +71,6 @@ const UserForm = () => {
           .catch(err => {
             console.log('failed', err)
           })
-
       }}
       // validate={validate}
       validationSchema={userSchema}

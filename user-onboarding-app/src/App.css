@@ -1,0 +1,97 @@
+body{
+  font-family: Helvetica;
+}
+
+.App {
+  text-align: center;
+}
+
+.formContainer{
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+
+  margin: 0 auto;
+  padding: 2vh 5vw;
+
+  border: 2px solid rgb(122, 122, 122);
+  border-radius: 8px;
+
+  background: rgb(228, 239, 243);
+  
+  width: 200px;
+}
+
+.submitButton{
+  width: 100px;
+
+  margin-top: 5vh;
+  padding: .75vh 2vw;
+
+  border: none;
+  border-radius: 3px;
+  outline: none;
+  cursor: pointer;
+
+  background: green;
+  color: white;
+
+  font-weight: 600;
+  font-family: helvetica;
+  font-size: 1.05rem;
+}
+
+.submitButton:active{
+  background: rgb(0, 94, 0);
+}
+
+label{
+  margin-top: 3vh;
+}
+
+.input{
+  padding: .75vh .75vw;
+
+  border-radius: 5px;
+  border: 1px solid gray;
+  outline: none;
+}
+
+.red{
+  font-size: 0.85rem;
+
+  border: 1px solid rgb(151, 151, 151);
+  border-radius: 2px;
+
+  margin-top: .5vh;
+  padding: .25vh .5vw;
+
+  font-style: italic;
+
+  background-color: rgb(255, 241, 221);
+  color: red;
+  font-weight: 500;
+}
+
+
+
+.userContainer{
+  display: flex;
+  justify-content: center;
+  border-bottom: 1px solid black;
+}
+
+.userContainer:nth-of-type(even){
+  background: rgb(221, 221, 221);
+}
+
+.subUserContainer{
+  display: flex;
+  flex-flow: column;
+  align-items: flex-start;
+  overflow-wrap: break-word;
+}
+
+.userProfilesTitle{
+  margin-top: 5vh;
+}
